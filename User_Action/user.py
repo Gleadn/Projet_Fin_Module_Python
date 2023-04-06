@@ -8,3 +8,25 @@
 
     -une fonction pour quitter la salle
 '''
+
+def consulter_salles(salles):
+    """
+    Cette fonction prend en entrée une liste de salles de jeux et affiche les informations sur chaque salle:
+    - Le nom de la salle
+    - Le nombre de joueurs autorisés
+    - Le nombre de joueurs actuels
+    - L'état de la salle (ouverte/fermée)
+    """
+
+    
+    print("Liste des salles de jeux:\n")
+    for salle in salles:
+        print(f"Nom: {salle.nom}")
+        print(f"Nombre de joueurs autorisés: {salle.nb_max_joueurs}")
+        print(f"Nombre de joueurs actuels: {len(salle.joueurs)}")
+        if salle.etat == "ouvert":
+            print("Etat: Ouverte\n")
+        else:
+            print("Etat: Fermée\n")
+
+consulter_salles()
