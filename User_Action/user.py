@@ -9,24 +9,20 @@
     -une fonction pour quitter la salle
 '''
 
-def consulter_salles(salles):
-    """
-    Cette fonction prend en entrée une liste de salles de jeux et affiche les informations sur chaque salle:
-    - Le nom de la salle
-    - Le nombre de joueurs autorisés
-    - Le nombre de joueurs actuels
-    - L'état de la salle (ouverte/fermée)
-    """
+import Plateforme_Centrale.database as db
 
-    
-    print("Liste des salles de jeux:\n")
-    for salle in salles:
-        print(f"Nom: {salle.nom}")
-        print(f"Nombre de joueurs autorisés: {salle.nb_max_joueurs}")
-        print(f"Nombre de joueurs actuels: {len(salle.joueurs)}")
-        if salle.etat == "ouvert":
-            print("Etat: Ouverte\n")
-        else:
-            print("Etat: Fermée\n")
+def consulter_salles():
+    description = dict(bienvenue="Liste des salles de jeux:")
+    description['liste salle'] = list()
+    for salle in db.salles:
+        description['liste salle'].append(f"Nom: {salle} Nombre de joueurs autorisés: {db.salles[salle][1]} Nombre de joueurs actuels: {len(db.salles[salle][0])}")
+    return description
 
-consulter_salles()
+
+def rejoindre_salle(nom, id):
+    if len(db.salles[nom][0]) < db.salles[nom][1]:
+        db.salles[nom][0].append(id)
+
+
+def quitter_salle(nom):
+    db.salles[nom][0].pop()
