@@ -15,7 +15,9 @@ def consulter_salles():
     description = dict(bienvenue="Liste des salles de jeux:")
     description['liste salle'] = list()
     for salle in db.salles:
-        description['liste salle'].append(f"Nom: {salle} Nombre de joueurs autorisés: {db.salles[salle][1]} Nombre de joueurs actuels: {len(db.salles[salle][0])}")
+        description['liste salle'].append(f"Nom: {salle}; Nombre de joueurs autorisés: {db.salles[salle][1]}; "
+                                          f"Nombre de joueurs actuels: {len(db.salles[salle][0])}; "
+                                          f"Joueurs présents dans la salle: {db.salles[salle][0]}")
     return description
 
 
@@ -24,5 +26,13 @@ def rejoindre_salle(nom, id):
         db.salles[nom][0].append(id)
 
 
-def quitter_salle(nom):
-    db.salles[nom][0].pop()
+def quitter_salle(nom, id):
+    db.salles[nom][0].remove(id)
+
+
+def consulter_joueurs():
+    description = dict(bienvenue="Liste des joueurs connectés:")
+    description['liste joueurs'] = list()
+    for joueur in db.joueurs:
+        description['liste joueurs'].append(f"ID: {joueur}; Pseudo: {db.joueurs[joueur]}")
+    return description
