@@ -1,33 +1,19 @@
-'''
-    - ajouter une salle
-    - supprimer une salle
-'''
+import Plateforme_Centrale.databaseSalle as dbs
 
-import Plateforme_Centrale.database as db
+#Ces fonctions ne sont pas utilisé car il n'y a pas de différence entre un user classique et un user admin
 
-
+#permet d'ajouter une seule salle
 def ajoutSalle(places):
-    nom = 'salle' + str(len(db.salles))
+    nom = 'salle' + str(len(dbs.salles))
     nbr_place = [0] * places
-    db.salles[nom] = nbr_place
-    print(db.salles)
+    dbs.salles[nom] = nbr_place
+    print(dbs.salles)
     print(f"La salle '{nom}' de {places} places a été créé et ajouté à la liste.")
 
 
+#permet de supprimer une seule salle
 def supprimerSalle(nom):
-    del db.salles[nom]
-    print(db.salles)
+    del dbs.salles[nom]
+    print(dbs.salles)
     print(f"La salle '{nom}' a été supprimé de la liste.")
 
-
-def supprimerSalleVide():
-    for salle in db.salles:
-        if tableauVide(salle):
-            supprimerSalle(salle)
-
-
-def tableauVide(nom):
-    for value in db.salles[nom]:
-        if value != 0:
-            return False
-    return True
