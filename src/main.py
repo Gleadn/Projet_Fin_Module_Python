@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    db.salles = db.creer_salles(5, 10, 10, 30)
+    db.salles = db.creer_salles(len(db.salles), 5, 10, 10, 30)
+    db.joueurs = db.generate_pseudo(len(db.joueurs))
     return 'Bienvenue sur l\'API de notre site de salle de jeux!'
 
 
@@ -40,3 +41,15 @@ def quitter_salle():
 
     user.quitter_salle(nom)
     return f'Vous avez quitter la {nom}'
+
+
+@app.route('/ajouter_salle', methods=['GET', 'POST'])
+def ajouter_salle():
+    db.salles = db.creer_salles(len(db.salles), 5, 10, 10, 30)
+    return "Des salles ont été ajouté"
+
+
+@app.route('/ajouter_joueurs', methods=['GET', 'POST'])
+def ajouter_joueurs():
+    db.joueurs = db.generate_pseudo(len(db.joueurs))
+    return "100 joueurs ont été ajouté"
